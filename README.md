@@ -35,7 +35,10 @@ todo move "daily/doing/readme" "daily/done"
 todo move "daily/todo/push" "daily/doing"
 todo move "daily/doing/push" "daily/done"
 
-# Open the "Daily Tasks" board in the browser
+# Show the ToDo list
+todo web "daily/todo"
+
+# Or open the "Daily Tasks" board in the browser
 todo web "daily"
 ```
 
