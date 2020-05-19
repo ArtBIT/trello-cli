@@ -11,7 +11,70 @@ This is a simple wrapper around [trello-cli](https://github.com/mheap/trello-cli
 
 ## Usage
 ```bash
-todo --help
+This is a CLI helper for Trello board (https://trello.com)
+USAGE:
+    todo COMMAND CARDPATH [OPTIONS]
+
+ARGS:
+    <CARDPATH> = <BOARD>[/<LIST>[/CARD]]
+            is simply a forward-slash delimited string that describes
+            the BOARD/LIST/CARD as a simple folder structure.  It is
+            not case sensitive, and you do not need to provide the full
+            BOARD/LIST/CARD names, but can use substrings instead.
+            The following are all identical: "Daily Tasks/Todo/Call"
+            "daily/todo/call" "tasks/tod/call" Bear in mind that in
+            case you have multiple boards/lists/cards that share the
+            same substring, the first match will be used.  You have
+            to provide a substring that is unique to the specific
+            BOARD/LIST/CARD.
+
+COMMANDS:
+    h, help
+            Shows this screen.
+
+    r, refresh
+            Reloads data from the Trello cloud.
+
+    a, add CARDPATH/TITLE [DESCRIPTION]
+            Adds a new card titled TITLE with optional DESCRIPTION to
+            the BOARD/LIST specified in the CARDPATH.
+
+    d, delete CARDPATH
+            Delete a card, list or a board.
+            Examples:
+               $ todo d "Daily Tasks"   
+                Deletes the board "Daily Tasks".
+
+               $ todo d "Daily Tasks/Todo"
+                Deletes the list "Todo" in the board "Daily Tasks".
+
+               $ todo d "Daily Tasks/Todo/Call"
+                Deletes the card titled "Call" on the list "Todo" in the
+                board "Daily Tasks".
+
+    v, view [CARDPATH]
+            Shows the contents of a card, list, or a board defined by
+            the CARDPATH.
+
+    m, move CARDPATH CARDPATH
+            Move a card defined by the first CARDPATH to another
+            CARDPATH.
+            Examples:
+                $ todo m "Daily Tasks/Todo/Call"  "Daily Tasks/Done"
+                Moves the card titled "Call" from the list "Todo" of the
+                board "Daily Tasks" to the list called "Done" on the
+                same board.
+
+                $ todo m "daily/todo/call"  "daily/done"
+                Similarly, you can use parts of the board/list/card
+                names using case-insensitive strings to type the same
+                action more quickly.
+                NOTE: In case of multiple matches the first match will
+                be used.
+
+    w, web CARDPATH
+            Opens the board/list/card in the Trello web app in a browser.
+
 ```
 
 ## Examples

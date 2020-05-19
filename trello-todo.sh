@@ -2,80 +2,71 @@
 
 _usage() {
     command="todo"
-    padding="    "
     cat <<USAGE
 ${command} is a CLI helper for Trello board (https://trello.com)
-Usage:
-    ${command} [h|help|-h|--help]       Shows this screen.
+USAGE:
+    ${command} COMMAND CARDPATH [OPTIONS]
 
-    ${command} [r|refresh]              Reloads data from the trello cloud.
+ARGS:
+    <CARDPATH> = <BOARD>[/<LIST>[/CARD]]
+            is simply a forward-slash delimited string that describes
+            the BOARD/LIST/CARD as a simple folder structure.  It is
+            not case sensitive, and you do not need to provide the full
+            BOARD/LIST/CARD names, but can use substrings instead.
+            The following are all identical: "Daily Tasks/Todo/Call"
+            "daily/todo/call" "tasks/tod/call" Bear in mind that in
+            case you have multiple boards/lists/cards that share the
+            same substring, the first match will be used.  You have
+            to provide a substring that is unique to the specific
+            BOARD/LIST/CARD.
 
-    ${command} [a|add] CARDPATH/title [description]
-    ${padding}                          Adds a new card titled 'title' with
-    ${padding}                          optional description.
+COMMANDS:
+    h, help
+            Shows this screen.
 
-    ${command} [d|delete] CARDPATH      Delete a card, list or a board.
-        Examples:
-           \$> ${command} d "Daily Tasks"   
-    ${padding}                          Deletes the board "Daily Tasks".
+    r, refresh
+            Reloads data from the Trello cloud.
 
-           \$> ${command} d "Daily Tasks/Todo"
-    ${padding}                          Deletes the list "Todo" in the
-    ${padding}                          board "Daily Tasks".
+    a, add CARDPATH/TITLE [DESCRIPTION]
+            Adds a new card titled TITLE with optional DESCRIPTION to
+            the BOARD/LIST specified in the CARDPATH.
 
-           \$> ${command} d "Daily Tasks/Todo/Call"
-    ${padding}                          Deletes the card titled "Call" on
-    ${padding}                          the list "Todo" in the 
-    ${padding}                          board "Daily Tasks".
+    d, delete CARDPATH
+            Delete a card, list or a board.
+            Examples:
+               \$ ${command} d "Daily Tasks"   
+                Deletes the board "Daily Tasks".
 
-    ${command} [v|view] [CARDPATH]      Shows the contents of a card, 
-    ${padding}                          list, or a board defined by the
-    ${padding}                          CARDPATH.
+               \$ ${command} d "Daily Tasks/Todo"
+                Deletes the list "Todo" in the board "Daily Tasks".
 
-    ${command} [m|move] CARDPATH CARDPATH
-    ${padding}                          Move a card defined by the first 
-    ${padding}                          CARDPATH to another CARDPATH.
-        Examples:
-           \$> ${command} m "Daily Tasks/Todo/Call"  "Daily Tasks/Done"
-    ${padding}                          Moves the card titled "Call"
-    ${padding}                          from the list "Todo" of the
-    ${padding}                          board "Daily Tasks" to the
-    ${padding}                          list called "Done" on the 
-    ${padding}                          same board.
+               \$ ${command} d "Daily Tasks/Todo/Call"
+                Deletes the card titled "Call" on the list "Todo" in the
+                board "Daily Tasks".
 
-           \$> ${command} m "daily/todo/call"  "daily/done"
-    ${padding}                          Similarly, you can use parts of
-    ${padding}                          the board/list/card names using
-    ${padding}                          case-insensitive strings to
-    ${padding}                          type the same action more
-    ${padding}                          quickly.
-    ${padding}                          NOTE: In case of multiple matches
-    ${padding}                          the first match will be used.
+    v, view [CARDPATH]
+            Shows the contents of a card, list, or a board defined by
+            the CARDPATH.
 
-    ${command} [w|web] CARDPATH         Opens the board/list/card in the
-    ${padding}                          Trello web app in a browser.
+    m, move CARDPATH CARDPATH
+            Move a card defined by the first CARDPATH to another
+            CARDPATH.
+            Examples:
+                \$ ${command} m "Daily Tasks/Todo/Call"  "Daily Tasks/Done"
+                Moves the card titled "Call" from the list "Todo" of the
+                board "Daily Tasks" to the list called "Done" on the
+                same board.
 
-    CARDPATH                      CARDPATH is simply a forward-slash
-                                  delimited string that describes
-                                  the board/list/card as a simple 
-                                  folder structure.
-                                  It is not case sensitive, and
-                                  you do not need to provide the
-                                  full board/list/card names, but
-                                  can use substrings instead.
-                                  The following are all identical:
-                                   "Daily Tasks/Todo/Call"
-                                   "daily/todo/call"
-                                   "tasks/tod/call"
-                                   Bear in mind that in case you
-                                   have multiple boards/lists/cards
-                                   that share the same substring, 
-                                   the first match will be used.
-                                   You have to provide a substring
-                                   that is unique to the specific
-                                   board/list/card.
+                \$ ${command} m "daily/todo/call"  "daily/done"
+                Similarly, you can use parts of the board/list/card
+                names using case-insensitive strings to type the same
+                action more quickly.
+                NOTE: In case of multiple matches the first match will
+                be used.
 
-                                    
+    w, web CARDPATH
+            Opens the board/list/card in the Trello web app in a browser.
+
 USAGE
 }
 
