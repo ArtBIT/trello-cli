@@ -81,9 +81,9 @@ USAGE
 
 _open_in_browser() {
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        nohup xdg-open "$@" > /dev/null 2>&1
+        nohup xdg-open "$@" >/dev/null 2>&1
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        open -a "Google Chrome" "$@" /dev/null 2>&1
+        open -a "Google Chrome" "$@" >/dev/null 2>&1
     fi
 }
 
@@ -239,11 +239,12 @@ _web() {
     _open_in_browser https://trello.com/c/$cardid
     return;
   fi
-  if [ ! -z "$list" ]; then
-    local listid=$(_get_listid "$board" "$list")
-    _open_in_browser https://trello.com/l/$listid
-    return;
-  fi
+  # You cannot link to a list, so...
+  # if [ ! -z "$list" ]; then
+  #   local listid=$(_get_listid "$board" "$list")
+  #   _open_in_browser https://trello.com/l/$listid
+  #   return;
+  # fi
   if [ ! -z "$board" ]; then
     local boardid=$(_get_boardid "$board")
     _open_in_browser https://trello.com/b/$boardid
